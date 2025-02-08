@@ -31,7 +31,6 @@ const CalendarDays = (props) => {
     return (
         <div id="calendar-table-content">
             {currentDays.map((day, index) => {
-                console.log(day);
                 return (
                     <div 
                         className={"calendar-day" + (day.currentMonth ? " current" : "") + (day.selected ? " selected" : "")}

@@ -24,6 +24,7 @@ const Calendar = () => {
             };
         };
         fetchData();
+        console.log(appointments);
     }, []);
 
     useEffect(() => {
