@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "semantic-ui-react";
 
 import "./style.css";
@@ -10,10 +10,27 @@ const Calendar = () => {
 
     const [date, setDate] = useState(new Date());
 
+    useEffect(() => {
+        setDate(date);
+    }, []);
+
     return (
-        <div>
-            <Header as="h1">Calendar</Header>
-            <Header as="h2">{months[setDate(date.getMonth())]} {setDate(date.getFullYear())}</Header>
+        <div id="calendar-container">
+            <div id="calendar">
+                <Header id="calendar-header" as="h2">{months[date.getMonth()]} {date.getFullYear()}</Header>
+            </div>
+            <div id="calendar-body">
+                <div id="calendar-table-header">
+                    {days.map((day, index) => {
+                            return (
+                                <div key={index}>{day}</div>
+                            );
+                        })}
+                </div>
+                <div id="calendar-table">
+
+                </div>
+            </div>
         </div>
     );
 };
