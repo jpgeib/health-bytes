@@ -6,4 +6,8 @@ if (process.env.NODE_ENV === "production") {
     database = process.env.DEV_DB_NAME;
 }
 
-module.exports = {};
+const getAllPatients = `SELECT * FROM ${database}.patients`;
+
+module.exports = {
+    getAllPatients
+};

@@ -1,7 +1,12 @@
 const db = require("../../config");
+const { getAllProviders } = require("../../models/providers");
 
 module.exports = {
-    getAllProviders: (req, res) => {
-        res.json("getting all providers");
+    getProviders: (req, res) => {
+        console.log("getting all providers");
+        db.query(getAllProviders, (err, data) => {
+            if (err) return res.status(500).json(err);
+            return res.status(200).json(data);
+        });
     }
 };

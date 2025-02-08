@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { getAllPatients } = require("../../../controllers/patientController");
+const { getPatients } = require("../../../controllers/patientController");
 
-router.get("/", getAllPatients);
+router.get("/", getPatients);
 
 module.exports = router;
