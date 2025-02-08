@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Header } from "semantic-ui-react";
 import CalendarDays from "./CalendarDays";
 import { axiosInstance } from "../../utils/api";
+import { csvToJSON } from "../../utils/csvToJSON";
+import Appointments from "../../assets/Existing_Appointments.csv";
 
 import "./style.css";
 
@@ -13,6 +15,9 @@ const Calendar = () => {
 
     const [date, setDate] = useState(new Date());
     const [appointments, setAppointments] = useState([]);
+
+    csvToJSON(Appointments);
+    console.log(Appointments);
 
     useEffect(() => {
         const fetchData = async () => {
