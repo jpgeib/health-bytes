@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "semantic-ui-react";
 import CalendarDays from "./CalendarDays";
+import { axiosInstance } from "../../utils/api";
+import { csvToJSON } from "../../utils/csvToJSON";
+import Appointments from "../../assets/Existing_Appointments.csv";
 
 import "./style.css";
 
@@ -11,6 +14,23 @@ const Calendar = () => {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const [date, setDate] = useState(new Date());
+    const [appointments, setAppointments] = useState([]);
+
+    csvToJSON(Appointments);
+    console.log(Appointments);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axiosInstance.get("/appointments");
+                setAppointments(res.data);
+            } catch (err) {
+                console.log(err);
+            };
+        };
+        fetchData();
+        console.log(appointments);
+    }, []);
 
     useEffect(() => {
         setDate(date);
@@ -28,12 +48,12 @@ const Calendar = () => {
             <div id="calendar-body">
                 <div id="calendar-table-header">
                     {days.map((day, index) => {
-                            return (
-                                <div key={index}>
-                                    <p>{day}</p>
-                                </div>
-                            );
-                        })}
+                        return (
+                            <div key={index}>
+                                <p>{day}</p>
+                            </div>
+                        );
+                    })}
                 </div>
                 <div id="calendar-table">
                     <CalendarDays day={date} changeCurrentDay={changeCurrentDay} />
